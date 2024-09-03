@@ -14,18 +14,21 @@
             <h3>since 1993</h3>
             <br>
             <nav>
-                <ul>
+                <div class="menu-toggle" id="menuToggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="nav-links" id="navLinks">
                     <li><a href="#features">Features</a></li>
-                    <br>
                     <li><a href="#download">Download</a></li>
-                    <br>
                     <li><a href="#community">Community</a></li>
-                    <br>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
 
     <main>
         <section id="hero">
@@ -171,6 +174,32 @@ backToTopBtn.addEventListener("click", function() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
 });
+ 
+  // Hamburger menu functionality
+  const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Function to close the menu if the user clicks outside of it
+        function handleClickOutside(event) {
+            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        }
+
+        // Add event listener for clicks outside the menu
+        document.addEventListener('click', handleClickOutside);
+
+        // Hide the menu when a menu item is clicked
+        const menuItems = document.querySelectorAll('.nav-links a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
 </script>
 </body>
 </html>
